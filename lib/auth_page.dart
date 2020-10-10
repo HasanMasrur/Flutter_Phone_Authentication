@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Authpage extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class Authpage extends StatefulWidget {
 }
 
 class _Authpage extends State<Authpage> {
+  String number;
+  String verificationCode;
+  String smscode;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +96,9 @@ class _Authpage extends State<Authpage> {
                       focusColor: Colors.black,
                       fillColor: Colors.red,
                     ),
-                    onChanged: (vlaue) {},
+                    onChanged: (vlaue) {
+                      number = vlaue;
+                    },
                   ),
                   SizedBox(
                     height: 10,
@@ -99,7 +106,9 @@ class _Authpage extends State<Authpage> {
                   RaisedButton(
                       child: Text('SignIn'),
                       color: Colors.red,
-                      onPressed: () {})
+                      onPressed: () {
+                        _submit();
+                      })
                 ],
               ),
             )
@@ -107,5 +116,56 @@ class _Authpage extends State<Authpage> {
         ),
       ),
     );
+  }
+
+  Future<void> _submit() async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
+    final PhoneVerificationCompleted verificationCompleted =
+        (AuthCredential credential) {
+      setState(() {
+        print("verification");
+        print(credential);
+      });
+    };
+    final PhoneVerificationFailed phoneVerificationFailed =
+        (FirebaseAuthException exception) {
+      print('${exception.message}');
+    };
+    final PhoneCodeSent phoneCodeSent =
+        (String verId, [int forceResendingToken]) {
+      this.verificationCode = verId;
+      _smscode(context).then((value) => print('success'));
+    };
+    final PhoneCodeAutoRetrievalTimeout phoneCodeAutoRetrievalTimeout =
+        (String verId) {
+      this.verificationCode = verId;
+    };
+
+    _auth.verifyPhoneNumber(
+        phoneNumber: number,
+        verificationCompleted: verificationCompleted,
+        verificationFailed: phoneVerificationFailed,
+        codeSent: phoneCodeSent,
+        codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
+  }
+
+  Future<void> _smscode(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Enter code'),
+            content: TextField(
+              onChanged: (value) {
+                smscode = value;
+              },
+            ),
+            contentPadding: EdgeInsets.all(10),
+            actions: [
+              FlatButton(onPressed: () {}, child: Text('verify')),
+            ],
+          );
+        });
   }
 }
