@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_Phone_authentication/homepage.dart';
 
 class Authpage extends StatefulWidget {
   @override
@@ -12,9 +14,11 @@ class Authpage extends StatefulWidget {
 class _Authpage extends State<Authpage> {
   String number;
   String verificationCode;
-  String smscode;
+  String smsCode;
+
   @override
   Widget build(BuildContext context) {
+    Firebase.initializeApp();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -86,7 +90,7 @@ class _Authpage extends State<Authpage> {
               child: Column(
                 children: [
                   TextFormField(
-                    keyboardType: TextInputType.number,
+                    //  keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.call,
@@ -158,14 +162,44 @@ class _Authpage extends State<Authpage> {
             title: Text('Enter code'),
             content: TextField(
               onChanged: (value) {
-                smscode = value;
+                smsCode = value;
               },
             ),
             contentPadding: EdgeInsets.all(10),
             actions: [
-              FlatButton(onPressed: () {}, child: Text('verify')),
+              FlatButton(
+                  onPressed: () {
+                    signIn();
+
+                    //  FirebaseAuth.instance.currentUser.then((user) {
+
+                    //           if (user != null) {
+                    //             Navigator.of(context).pop();
+                    //             Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(builder: (context) => HomePage()),
+                    //             );
+                    //           } else {
+                    //             Navigator.of(context).pop();
+                    //             signIn();
+                    //           }
+                    //         });
+                  },
+                  child: Text('verify')),
             ],
           );
         });
+  }
+
+  signIn() {
+    AuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(
+        verificationId: verificationCode, smsCode: smsCode);
+    FirebaseAuth.instance
+        .signInWithCredential(phoneAuthCredential)
+        .then((user) => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            ))
+        .catchError((e) => print(e));
   }
 }

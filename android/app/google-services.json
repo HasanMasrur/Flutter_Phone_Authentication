@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "270907269143",
+    "firebase_url": "https://flutter-phone-authentica-539b4.firebaseio.com",
+    "project_id": "flutter-phone-authentica-539b4",
+    "storage_bucket": "flutter-phone-authentica-539b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270907269143:android:3a24b39b2ee22e6109fc52",
+        "android_client_info": {
+          "package_name": "com.example.flutter_Phone_authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270907269143-833rjmn1jrtdmd1p3s1pmvgd0n3s1okj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_Phone_authentication",
+            "certificate_hash": "a619a58f10e08d1964b52beed3806db6d79eacd6"
+          }
+        },
+        {
+          "client_id": "270907269143-5kfo2e1c55sui8ltqk2ffk0ag4v3pvg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbwadfZ1Oqj39GrdGksSEjwVKGcVXa0lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270907269143-5kfo2e1c55sui8ltqk2ffk0ag4v3pvg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
