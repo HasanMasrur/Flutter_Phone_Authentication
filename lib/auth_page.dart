@@ -154,7 +154,7 @@ class _Authpage extends State<Authpage> {
         codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
   }
 
-  Future<void> _smscode(BuildContext context) {
+  Future<void> _smscode(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -168,22 +168,21 @@ class _Authpage extends State<Authpage> {
             contentPadding: EdgeInsets.all(10),
             actions: [
               FlatButton(
-                  onPressed: () {
-                    signIn();
+                  onPressed: () async {
+                    final users = await FirebaseAuth.instance.currentUser;
 
-                    //  FirebaseAuth.instance.currentUser.then((user) {
-
-                    //           if (user != null) {
-                    //             Navigator.of(context).pop();
-                    //             Navigator.push(
-                    //               context,
-                    //               MaterialPageRoute(builder: (context) => HomePage()),
-                    //             );
-                    //           } else {
-                    //             Navigator.of(context).pop();
-                    //             signIn();
-                    //           }
-                    //         });
+                    if (users != null) {
+                      Navigator.of(context).pop();
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => HomePage()),
+                      // );
+                      return;
+                    } else {
+                      Navigator.of(context).pop();
+                      print('test 1');
+                      signIn();
+                    }
                   },
                   child: Text('verify')),
             ],

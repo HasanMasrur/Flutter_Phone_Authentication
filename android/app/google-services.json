@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "270907269143",
-    "firebase_url": "https://flutter-phone-authentica-539b4.firebaseio.com",
-    "project_id": "flutter-phone-authentica-539b4",
-    "storage_bucket": "flutter-phone-authentica-539b4.appspot.com"
+    "project_number": "1061743332879",
+    "firebase_url": "https://phone-authentication-feee2.firebaseio.com",
+    "project_id": "phone-authentication-feee2",
+    "storage_bucket": "phone-authentication-feee2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:270907269143:android:3a24b39b2ee22e6109fc52",
+        "mobilesdk_app_id": "1:1061743332879:android:9f7c850054be6738b91d7a",
         "android_client_info": {
           "package_name": "com.example.flutter_Phone_authentication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "270907269143-833rjmn1jrtdmd1p3s1pmvgd0n3s1okj.apps.googleusercontent.com",
+          "client_id": "1061743332879-i4uftmatrcge43qj0hg1v1dgtm56qh3m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.flutter_Phone_authentication",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "270907269143-5kfo2e1c55sui8ltqk2ffk0ag4v3pvg4.apps.googleusercontent.com",
+          "client_id": "1061743332879-ivqs0d58vids882bg5le1f1b7l8n4vn7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbwadfZ1Oqj39GrdGksSEjwVKGcVXa0lY"
+          "current_key": "AIzaSyAQiILJwOGiIlmHnr3cy2pre5b7eiQWVp4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "270907269143-5kfo2e1c55sui8ltqk2ffk0ag4v3pvg4.apps.googleusercontent.com",
+              "client_id": "1061743332879-ivqs0d58vids882bg5le1f1b7l8n4vn7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
