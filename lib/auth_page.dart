@@ -171,7 +171,7 @@ class _Authpage extends State<Authpage> {
                   onPressed: () async {
                     final users = await FirebaseAuth.instance.currentUser;
 
-                    if (users != null) {
+                    if (users == null) {
                       Navigator.of(context).pop();
                       // Navigator.push(
                       //   context,
