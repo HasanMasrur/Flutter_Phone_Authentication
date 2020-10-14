@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1061743332879:android:9f7c850054be6738b91d7a",
+        "mobilesdk_app_id": "1:1061743332879:android:2c038bc24b38887bb91d7a",
         "android_client_info": {
           "package_name": "com.example.flutter_Phone_authentication"
         }

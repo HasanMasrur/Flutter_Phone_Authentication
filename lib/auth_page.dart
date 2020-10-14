@@ -101,7 +101,7 @@ class _Authpage extends State<Authpage> {
                       fillColor: Colors.red,
                     ),
                     onChanged: (vlaue) {
-                      number = vlaue;
+                      number = '+88' + vlaue;
                     },
                   ),
                   SizedBox(
