@@ -13,6 +13,30 @@ class _Authpage extends State<Authpage> {
   String number;
   String verificationCode;
   String smsCode;
+  showdialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: Text('Please Confirm your phone number :  ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        content: Text(number),
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text("Edit")),
+          FlatButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OTPscreen(number)));
+              },
+              child: Text('Okay')),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +101,8 @@ class _Authpage extends State<Authpage> {
               child: Column(
                 children: [
                   TextFormField(
-                    //  keyboardType: TextInputType.number,
+                    maxLength: 11,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.call,
@@ -98,11 +123,11 @@ class _Authpage extends State<Authpage> {
                       child: Text('SignIn'),
                       color: Colors.red,
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OTPscreen()),
-                            (route) => false);
+                        if (number != null && number != "+88") {
+                          showdialog();
+                        } else {
+                          return;
+                        }
                       })
                 ],
               ),

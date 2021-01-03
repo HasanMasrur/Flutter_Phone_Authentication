@@ -5,6 +5,8 @@ import 'package:pinput/pin_put/pin_put.dart';
 import '../auth_page.dart';
 
 class OTPscreen extends StatefulWidget {
+  final number;
+  OTPscreen(this.number);
   @override
   State<StatefulWidget> createState() {
     return _OTPscreen();
