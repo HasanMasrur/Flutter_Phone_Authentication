@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pin_put/pin_put.dart';
 
 import '../auth_page.dart';
 
@@ -11,6 +12,17 @@ class OTPscreen extends StatefulWidget {
 }
 
 class _OTPscreen extends State<OTPscreen> {
+  final TextEditingController _pinPutController = TextEditingController();
+  final FocusNode _pinPutFocusNode = FocusNode();
+  final BoxDecoration pinPutDecoration = BoxDecoration(
+    // color: const Color.fromRGBO(43, 46, 66, 1),
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(10.0),
+    border: Border.all(
+      color: const Color.fromRGBO(126, 203, 224, 1),
+      //  color: Colors.black,
+    ),
+  );
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -70,6 +82,26 @@ class _OTPscreen extends State<OTPscreen> {
                           fontSize: 16,
                         ))),
                 SizedBox(height: 20),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: PinPut(
+                    fieldsCount: 6,
+                    textStyle: const TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                    eachFieldWidth: 40.0,
+                    eachFieldHeight: 55.0,
+                    focusNode: _pinPutFocusNode,
+                    controller: _pinPutController,
+                    submittedFieldDecoration: pinPutDecoration,
+                    selectedFieldDecoration: pinPutDecoration,
+                    followingFieldDecoration: pinPutDecoration,
+                    pinAnimationType: PinAnimationType.fade,
+                    onSubmit: (pin) async {},
+                  ),
+                ),
               ]),
         ),
       ),
