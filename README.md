@@ -5,10 +5,13 @@ A new Flutter project.
 ## Getting Started
 getPackage:
 
-  cupertino_icons
-  firebase_auth
-  firebase_core
-   pinput
+1  cupertino_icons
+
+2  firebase_auth
+
+3  firebase_core
+
+4   pinput
 
 
 Videos
