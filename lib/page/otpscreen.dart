@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -14,6 +15,9 @@ class OTPscreen extends StatefulWidget {
 }
 
 class _OTPscreen extends State<OTPscreen> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  String verificationCode;
+  String smsCode;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
   final BoxDecoration pinPutDecoration = BoxDecoration(
@@ -107,6 +111,38 @@ class _OTPscreen extends State<OTPscreen> {
               ]),
         ),
       ),
+    );
+  }
+
+  Future<void> _submit() async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
+    final PhoneVerificationCompleted verificationCompleted =
+        (AuthCredential credential) {
+      setState(() {
+        print("verification");
+        print(credential);
+      });
+    };
+    final PhoneVerificationFailed phoneVerificationFailed =
+        (FirebaseAuthException exception) {
+      print('${exception.message}');
+    };
+    final PhoneCodeSent phoneCodeSent =
+        (String verId, [int forceResendingToken]) {
+      this.verificationCode = verId;
+      //_smscode(context).then((value) => print('success'));
+    };
+    final PhoneCodeAutoRetrievalTimeout phoneCodeAutoRetrievalTimeout =
+        (String verId) {
+      this.verificationCode = verId;
+    };
+    _auth.verifyPhoneNumber(
+      phoneNumber: widget.number,
+      verificationCompleted: verificationCompleted,
+      verificationFailed: phoneVerificationFailed,
+      codeSent: phoneCodeSent,
+      codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout,
     );
   }
 }
