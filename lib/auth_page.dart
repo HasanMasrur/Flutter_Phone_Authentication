@@ -18,13 +18,13 @@ class _Authpage extends State<Authpage> {
   Widget build(BuildContext context) {
     Firebase.initializeApp();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF5F5DC),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               height: 270,
-              color: Colors.white,
+              color: Color(0xFFF5F5DC),
               child: Stack(
                 children: [
                   Container(
@@ -38,7 +38,7 @@ class _Authpage extends State<Authpage> {
                             color: Colors.blue,
                           )
                         ],
-                        color: Colors.white,
+                        color: Color(0xFFF5F5DC),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(30),
                             bottomRight: Radius.circular(30))),
