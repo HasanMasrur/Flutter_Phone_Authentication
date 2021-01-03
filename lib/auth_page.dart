@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_Phone_authentication/page/otpscreen.dart';
 
 class Authpage extends StatefulWidget {
   @override
@@ -96,7 +97,13 @@ class _Authpage extends State<Authpage> {
                   RaisedButton(
                       child: Text('SignIn'),
                       color: Colors.red,
-                      onPressed: () {})
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OTPscreen()),
+                            (route) => false);
+                      })
                 ],
               ),
             )
