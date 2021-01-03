@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 import '../auth_page.dart';
+import '../homepage.dart';
 
 class OTPscreen extends StatefulWidget {
   final number;
@@ -15,6 +16,12 @@ class OTPscreen extends StatefulWidget {
 }
 
 class _OTPscreen extends State<OTPscreen> {
+  @override
+  void initState() {
+    _submit();
+    super.initState();
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String verificationCode;
   String smsCode;
@@ -83,7 +90,7 @@ class _OTPscreen extends State<OTPscreen> {
                     margin: EdgeInsets.only(
                       left: 30,
                     ),
-                    child: Text('On Number  : ',
+                    child: Text('On Number  : + ${widget.number}',
                         style: TextStyle(
                           fontSize: 16,
                         ))),
@@ -105,7 +112,41 @@ class _OTPscreen extends State<OTPscreen> {
                     selectedFieldDecoration: pinPutDecoration,
                     followingFieldDecoration: pinPutDecoration,
                     pinAnimationType: PinAnimationType.fade,
-                    onSubmit: (pin) async {},
+                    onSubmit: (pin) async {
+                      try {
+                        await FirebaseAuth.instance
+                            .signInWithCredential(PhoneAuthProvider.credential(
+                                verificationId: verificationCode, smsCode: pin))
+                            .then((value) async {
+                          if (value.user != null) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()),
+                                (route) => false);
+                          } else {
+                            print('invalid code');
+                          }
+                        });
+                      } catch (e) {
+                        print('invalid code');
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Invalid Code '),
+                                content: Text('Try again'),
+                                actions: [
+                                  RaisedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Okay')),
+                                ],
+                              );
+                            });
+                      }
+                    },
                   ),
                 ),
               ]),

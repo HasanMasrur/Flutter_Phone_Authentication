@@ -72,21 +72,22 @@ class _Authpage extends State<Authpage> {
                       left: 140,
                       top: 120,
                       child: Container(
-                        decoration:
-                            BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                          BoxShadow(
-                              color: Colors.blue,
-                              blurRadius: 4,
-                              spreadRadius: 5,
-                              offset: Offset(0, 0))
-                        ]),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 70,
-                          child: ClipOval(
-                            child: Text('hasan'),
-                          ),
-                        ),
+                        height: 120,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU3Y1wumB36baqkiReVPMS8qyGE0PMe5O-wg&usqp=CAU',
+                                ),
+                                fit: BoxFit.cover),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.blue,
+                                  blurRadius: 4,
+                                  spreadRadius: 5,
+                                  offset: Offset(0, 0))
+                            ]),
                       )),
                 ],
               ),
