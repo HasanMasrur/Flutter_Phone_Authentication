@@ -3,8 +3,9 @@
 A new Flutter project.
 
 ## Getting Started
+Videos
+https://user-images.githubusercontent.com/48550316/103478770-1f276800-4df3-11eb-9803-6507948774c3.mp4
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
