@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_Phone_authentication/homepage.dart';
 
 class Authpage extends StatefulWidget {
   @override
@@ -75,17 +72,6 @@ class _Authpage extends State<Authpage> {
             Container(
               height: 150,
               margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 2,
-                      spreadRadius: 3,
-                      offset: Offset(0, 0),
-                      color: Colors.blue,
-                    )
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(50))),
               padding: EdgeInsets.only(left: 40, right: 30, top: 20),
               child: Column(
                 children: [
@@ -110,9 +96,7 @@ class _Authpage extends State<Authpage> {
                   RaisedButton(
                       child: Text('SignIn'),
                       color: Colors.red,
-                      onPressed: () {
-                        _submit();
-                      })
+                      onPressed: () {})
                 ],
               ),
             )
@@ -120,85 +104,5 @@ class _Authpage extends State<Authpage> {
         ),
       ),
     );
-  }
-
-  Future<void> _submit() async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
-
-    final PhoneVerificationCompleted verificationCompleted =
-        (AuthCredential credential) {
-      setState(() {
-        print("verification");
-        print(credential);
-      });
-    };
-    final PhoneVerificationFailed phoneVerificationFailed =
-        (FirebaseAuthException exception) {
-      print('${exception.message}');
-    };
-    final PhoneCodeSent phoneCodeSent =
-        (String verId, [int forceResendingToken]) {
-      this.verificationCode = verId;
-      _smscode(context).then((value) => print('success'));
-    };
-    final PhoneCodeAutoRetrievalTimeout phoneCodeAutoRetrievalTimeout =
-        (String verId) {
-      this.verificationCode = verId;
-    };
-
-    _auth.verifyPhoneNumber(
-        phoneNumber: number,
-        verificationCompleted: verificationCompleted,
-        verificationFailed: phoneVerificationFailed,
-        codeSent: phoneCodeSent,
-        codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
-  }
-
-  Future<void> _smscode(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Enter code'),
-            content: TextField(
-              onChanged: (value) {
-                smsCode = value;
-              },
-            ),
-            contentPadding: EdgeInsets.all(10),
-            actions: [
-              FlatButton(
-                  onPressed: () async {
-                    final users = await FirebaseAuth.instance.currentUser;
-
-                    if (users == null) {
-                      Navigator.of(context).pop();
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => HomePage()),
-                      // );
-                      return;
-                    } else {
-                      Navigator.of(context).pop();
-                      print('test 1');
-                      signIn();
-                    }
-                  },
-                  child: Text('verify')),
-            ],
-          );
-        });
-  }
-
-  signIn() {
-    AuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(
-        verificationId: verificationCode, smsCode: smsCode);
-    FirebaseAuth.instance
-        .signInWithCredential(phoneAuthCredential)
-        .then((user) => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            ))
-        .catchError((e) => print(e));
   }
 }
